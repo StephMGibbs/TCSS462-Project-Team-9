@@ -65,24 +65,18 @@ public class HelloMySQL implements RequestHandler<Request, HashMap<String, Objec
             //Class.forName(driver);
             Connection con = DriverManager.getConnection(url,username,password);
             
-            PreparedStatement ps = con.prepareStatement("insert into mytable values('" + request.getMysqlversion() + "','b','c');");
+            PreparedStatement ps = con.prepareStatement("insert into mytable values('" + request.getName() + "','b','c');");
             ps.execute();
             ps = con.prepareStatement("select * from mytable;");
             ResultSet rs = ps.executeQuery();
             LinkedList<String> ll = new LinkedList<String>();
-            
             while (rs.next())
             {
                 logger.log("name=" + rs.getString("name"));
                 ll.add(rs.getString("name"));
-                logger.log("col2=" + rs.getString("col3"));
+                logger.log("col2=" + rs.getString("col2"));
                 logger.log("col3=" + rs.getString("col3"));
             }
-            
-            ps = con.prepareStatement("SELECT version() AS version;");
-            ps.execute();
-            rs = ps.executeQuery();
-            
             rs.close();
             con.close();
             r.setNames(ll);
@@ -182,9 +176,6 @@ public class HelloMySQL implements RequestHandler<Request, HashMap<String, Objec
 
         // Load the name into the request object
         req.setName(name);
-        
-        //add version to request obj too
-        req.getMysqlversion();
 
         // Report name to stdout
         System.out.println("cmd-line param name=" + req.getName());
