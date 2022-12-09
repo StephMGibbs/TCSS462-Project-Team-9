@@ -16,6 +16,14 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import saaf.*;
 
+
+
+/**
+ * uwt.lambda_test::handleRequest
+ *
+ * @author Wes Lloyd
+ * @author Robert Cordingly
+ */
 public class TransformService implements RequestHandler<Request, HashMap<String, Object>> {
     
     String filename = "";
@@ -125,6 +133,8 @@ public class TransformService implements RequestHandler<Request, HashMap<String,
                         
                         // Add the gross margin to the Gross Margin" column
                         row.add(String.valueOf((grossMargin)));
+                        
+                        
                         
                         
                         // Transform [Order Priority] column:
